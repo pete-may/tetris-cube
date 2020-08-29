@@ -83,10 +83,13 @@ class Board:
   def is_adjacent(self, p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1]) + abs(p1[2] - p2[2]) == 1
 
-  def printState(self):
+  def printState(self, newBlock):
     open(filename, 'w').close()
     for block in self.contained_blocks:
       block.printState()
+
+    if newBlock:
+      newBlock.printState()
     input("Press Enter to continue...")
 
 

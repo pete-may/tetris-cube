@@ -47,12 +47,23 @@ size = 4
 
 solved = False
 
+
+# solve from bottom to top
+def chooseSpace(spaces):
+  for lowestY in range(4):
+    for space in spaces:
+      if lowestY is space[1]:
+        return space
+
+
+
 def solve(board, blocks):
   global solved, filename
   # board.show()
   while len(blocks) > 0 and not solved:
     block = blocks.pop()
-    for space in board.available_spaces:
+    for space in sorted(board.available_spaces, key=lambda x: x[1]):
+      # space = chooseSpace(board.available_spaces)
       # print(space)
       block.translate(space)
       # print(block.spaces)
@@ -61,11 +72,11 @@ def solve(board, blocks):
         for j in range(4):
           for k in range(4):
 
-            print("board")
-            board.printState()
-            print("potential block")
-            block.printState()
-            input("Press Enter to continue...")
+            # print("board")
+            board.printState(block)
+            # print("potential block")
+            # block.printState()
+            # input("Press Enter to continue...")
 
             if board.can_fit(block):
               newBoard = board.place_block(block)
