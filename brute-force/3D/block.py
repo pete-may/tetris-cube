@@ -6,6 +6,7 @@ class Block:
     self.spaces = spaces
     self.pivot = (0,0,0)
 
+
   def rotateZ(self):
     newSpaces = set()
     for point in self.spaces:
@@ -17,6 +18,7 @@ class Block:
       
     self.spaces = newSpaces
   
+
   def rotateY(self):
     newSpaces = set()
     for point in self.spaces:
@@ -28,6 +30,7 @@ class Block:
 
     self.spaces = newSpaces
   
+
   def rotateX(self):
     newSpaces = set()
     for point in self.spaces:
@@ -36,11 +39,11 @@ class Block:
       newz = oz + (y-oy)
       newy = oy - (z-oz)
       newSpaces.add((point[0], newy, newz))
-
-
       
     self.spaces = newSpaces
-  # # Every block start with a pivot at 0,0. Translate() moves the block's pivot arount the board.
+
+
+  # Every block start with a pivot at (0,0,0). translate() moves the block's pivot arount the board.
   def translate(self, pos):
     dx = pos[0] - self.pivot[0]
     dy = pos[1] - self.pivot[1]
@@ -54,19 +57,20 @@ class Block:
       newz = point[2] + dz
       newSpaces.add((newx,newy,newz))
       
-    # print(self.spaces)
     self.spaces = newSpaces
-    # print(self.spaces)
     self.pivot = pos
 
-  def show(self):
+
+  def print(self):
     print("\"" + str(self.id) + "\", ",  end = '')
     print(self.spaces)
 
-  def printState(self):
+
+  def print_processing(self):
     string = str(self.id) + " " + str(len(self.spaces))
     for point in self.spaces:
       string += " " + str(point[0]) + " " + str(point[1]) + " " + str(point[2])
+
     with open(filename, 'a') as f:
       print(string, file=f)
 

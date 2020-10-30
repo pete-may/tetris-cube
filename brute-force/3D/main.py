@@ -3,8 +3,6 @@ from block import Block
 
 import copy
 
-# aBlock = Block("A", {(0,0,0), (1,0,0), (2,0,0), (1,0,1), (1,1,1)})
-
 block1 = Block(1, {(0,0,0), (1,0,0), (1,0,1), (1,1,1), (2,1,1)})
 
 block2 = Block(2, {(0,0,0),(1,0,0),(2,0,0),(3,0,0),(2,1,0)})
@@ -14,8 +12,6 @@ block3 = Block(3, {(0,0,0),(1,0,0),(1,1,0),(2,1,0),(3,1,0)})
 block4 = Block(4, {(0,0,0),(0,1,0),(1,1,0),(-1,1,0),(0,1,-1), (0,2,-1)})
 
 block5 = Block(5, {(0,0,0),(1,0,0),(0,1,0),(1,1,0),(1,1,-1)})
-
-# block6 = Block(6, {(0,0,0),(0,0,1),(1,0,1),(1,1,1),(2,1,1)})
 
 block6 = Block(6, {(0,0,0),(1,0,0),(2,0,0),(1,0,1),(0,1,0), (0,2,0)})
 
@@ -44,7 +40,6 @@ block12 = Block(12, {(0,0,0),(0,0,1),(1,0,1),(2,0,1),(2,1,1),(2,2,1)})
 # block1 = Block(2, {(0,0,0), (1,0,0), (0,1,0), (1,1,0), (2,0,0), (2,1,0), (2,2,0), (1,2,0), (0,2,0), (2,0,-1)})
 
 size = 4
-
 solved = False
 
 
@@ -54,7 +49,6 @@ def chooseSpace(spaces):
     for space in spaces:
       if lowestY is space[1]:
         return space
-
 
 
 def solve(board, blocks):
@@ -73,9 +67,9 @@ def solve(board, blocks):
           for k in range(4):
 
             # print("board")
-            board.printState(block)
+            board.print_processing(block)
             # print("potential block")
-            # block.printState()
+            # block.print_processing()
             # input("Press Enter to continue...")
 
             if board.can_fit(block):
@@ -104,82 +98,37 @@ def solve(board, blocks):
 
 if __name__ == "__main__":
 
-  board = Board(size)
+  # Testing
 
-  # block1.printState()
+  # block1.print_processing()
 
-  # block2.printState()
+  # block2.print_processing()
 
-  # exit()
+  # block3.print_processing()
 
-  # aBlock.print()  
+  # block4.print_processing()
 
-  # aBlock.translate((2,0,2))
+  # block5.print_processing()
 
-  # aBlock.print()
+  # block6.print_processing()
 
-  # aBlock.rotateZ()
+  # block7.print_processing()
 
-  # aBlock.print()
+  # block8.print_processing()
 
-  # aBlock.rotateX()
+  # block9.print_processing()
 
-  # aBlock.print()
+  # block10.print_processing()
 
+  # block11.print_processing()
 
-  # board.print()
-
-  blocks = [block1, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11, block12]
-
-
-  # block1.printState()
-
-  # block2.printState()
-
-  # block3.printState()
-
-  # block4.printState()
-
-  # block5.printState()
-
-  # block6.printState()
-
-  # block7.printState()
-
-  # block8.printState()
-
-  # block9.printState()
-
-  # block10.printState()
-
-  # block11.printState()
-
-  # block12.printState()
-
-  # exit()
+  # block12.print_processing()
 
   # blocks = [block1, block2]
 
+
+  board = Board(size)
+
+  blocks = [block1, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11, block12]
+
   solve(board, blocks)
-
-  # print("Board")
-  # print("---")
-  # print("")
-
-  # board.show()
-  
-  # print("Block: A")
-  # print("---")
-  # print("")
-
-  # aBlock.show(4)
-  # print("")
-
-
-
-  # blocks = [aBlock, bBlock, cBlock, dBlock, eBlock]
-
-  # print("Start")
-  # print("---")
-  # print("")
-  # solve(board, blocks)

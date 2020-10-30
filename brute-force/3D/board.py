@@ -7,7 +7,6 @@ smallestBlockSize = 5
 class Board:
   def __init__(self, size):
     self.size = size
-
     self.available_spaces = set()
     for i in range(size):
       for j in range(size):
@@ -16,9 +15,6 @@ class Board:
 
     self.contained_blocks = []
 
-  def show(self):
-    for block in self.contained_blocks:
-      block.show()
 
   def can_fit(self, block):
     canFit = block.spaces.issubset(self.available_spaces)
@@ -27,7 +23,7 @@ class Board:
 
     noGaps = self.no_gaps(block)
     if not noGaps:
-        return False
+      return False
     
     return True
     
@@ -37,9 +33,8 @@ class Board:
     newBoard.available_spaces = self.available_spaces - block.spaces
     newBoard.contained_blocks = copy.copy(self.contained_blocks)
     newBoard.contained_blocks.append(block)
-
-
     return newBoard
+
 
   def no_gaps(self, block):
     postBlockSpaces = self.available_spaces - block.spaces
@@ -80,16 +75,24 @@ class Board:
     
     return True
    
+
   def is_adjacent(self, p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1]) + abs(p1[2] - p2[2]) == 1
 
-  def printState(self, newBlock):
+
+  def print(self):
+    for block in self.contained_blocks:
+      block.print()
+
+
+  def print_processing(self, newBlock):
     open(filename, 'w').close()
     for block in self.contained_blocks:
-      block.printState()
+      block.print_processing()
 
     if newBlock:
-      newBlock.printState()
+      newBlock.print_processing()
+
     input("Press Enter to continue...")
 
 
