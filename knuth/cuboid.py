@@ -10,8 +10,6 @@ class Cuboid:
 
     self.setMinMax()
 
-
-
   def setMinMax(self):
     maxX = -10
     maxY = -10
@@ -39,13 +37,6 @@ class Cuboid:
     self.yLength = maxY-minY+1
     self.zLength = maxZ-minZ+1
 
-  # Let's face the block in a new direction (change its normal vector)
-  def setNormal(self, newNormal):
-    if self.normal == newNormal:
-      return
-    self.normal = newNormal
-
-
   def normalize(self):
     minX = 10
     minY = 10
@@ -62,63 +53,6 @@ class Cuboid:
     self.translate((abs(minX), abs(minY), abs(minZ)))
     self.base = (0,0,0)
 
-  def rotateX(self):
-    newSpaces = set()
-    for point in self.spaces:
-      z, y = point[2], point[1]
-      oz, oy = self.base[2], self.base[1]
-      newz = oz + (y-oy)
-      newy = oy - (z-oz)
-      newSpaces.add((point[0], newy, newz))
-      
-    self.spaces = newSpaces
-    temp = self.yLength
-    self.yLength = self.zLength
-    self.zLength = temp
-
-  def rotateY(self):
-    newSpaces = set()
-    for point in self.spaces:
-      x, z = point[0], point[2]
-      ox, oz = self.base[0], self.base[2]
-      newx = ox + (z-oz)
-      newz = oz - (x-ox)
-      newSpaces.add((newx, point[1], newz))
-
-    self.spaces = newSpaces
-    temp = self.xLength
-    self.xLength = self.zLength
-    self.zLength = temp
-
-
-  def rotateZ(self):
-    newSpaces = set()
-    for point in self.spaces:
-      x, y = point[0], point[1]
-      ox, oy = self.base[0], self.base[1]
-      newx = ox + (y-oy)
-      newy = oy - (x-ox)
-      newSpaces.add((newx,newy, point[2]))
-      
-    self.spaces = newSpaces
-    temp = self.yLength
-    self.yLength = self.xLength
-    self.xLength = temp
-
-  # Lets rotate the block around the current normal vector
-  # def spin(self):
-  #   newSpaces = set()
-  #   for point in self.spaces:
-  #     z, y = point[2], point[1]
-  #     oz, oy = self.base[2], self.base[1]
-  #     newz = oz + (y-oy)
-  #     newy = oy - (z-oz)
-  #     newSpaces.add((point[0], newy, newz))
-      
-  #   self.spaces = newSpaces
-
-
-  # blah
   def setNormal(self, newNormal):
     c = np.cross(self.normal, newNormal)
     
@@ -138,9 +72,7 @@ class Cuboid:
       d = self.whatDirection(c)
       self.rotate(d, -1, 1)
 
-
     self.normal = newNormal
-
 
   # Spin around current normal
   def spin(self):
@@ -152,7 +84,6 @@ class Cuboid:
     idx = np.where(n!=0)[0][0]
     # print(idx)
     return ['x','y','z'][idx]
-
 
   # Rotate on a given axis, units param indicates 90 degree increments
   def rotate(self, axis, direction, units):
@@ -175,13 +106,10 @@ class Cuboid:
     self.spaces = np.dot(self.spaces, rotationMatrix)
     self.setMinMax()
 
-
   def translate(self, pos):
     dx = pos[0] - self.base[0]
     dy = pos[1] - self.base[1]
     dz = pos[2] - self.base[2]
-
-    # newSpaces = set()
 
     newSpaces = []
 
@@ -195,14 +123,11 @@ class Cuboid:
     self.base = pos
 
   def print(self):
-    # print("\"" str(self.id) + "\", ",  end = '')
     print(str(self.id) + ", ",  end = '')
     spaces = []
     for space in self.spaces:
       spaces.append(np.array2string(space.astype(int), separator=','))
     print(", ".join(spaces))
-    # print()
-
 
   def print_processing(self, filename):
     string = str(self.id) + " " + str(len(self.spaces))

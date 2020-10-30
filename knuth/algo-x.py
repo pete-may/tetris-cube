@@ -1,6 +1,7 @@
 from dancing_links import DLX
 from cuboid import Cuboid
 import numpy as np
+from os import path
 
 filename = "/Users/petermay/Documents/Processing/Tetris/shared-state"
 
@@ -27,9 +28,6 @@ with open(sys.argv[1], 'r') as f:
   for line in lines:
     S.append(set(eval(line)))
 
-# print(X)
-# print(S)
-
 dancingLinks = DLX(X, S)
 
 print("Solved: " + str(dancingLinks.solve()))
@@ -39,15 +37,11 @@ print()
 for row in dancingLinks.solution:
   print(row)
 
-print()
+if path.exists(filename):
+  open(filename, 'w').close()
 
-open(filename, 'w').close()
+  for row in sorted(dancingLinks.solution, key=lambda row: min(row[1], key = lambda point: point[1])[1]):
+    cuboid=Cuboid(row[0],np.array(list(row[1])))
+    cuboid.print_processing(filename)
 
-for row in sorted(dancingLinks.solution, key=lambda row: min(row[1], key = lambda point: point[1])[1]):
-  cuboid=Cuboid(row[0],np.array(list(row[1])))
-  cuboid.print_processing(filename)
-  print(row)
-
-# for row in dancingLinks.solution:
-#   print(min(row[1], key = lambda point: point[1]))
 
