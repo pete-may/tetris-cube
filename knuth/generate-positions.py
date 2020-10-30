@@ -47,9 +47,7 @@ normals = np.array([(1,0,0), (-1,0,0), (0,1,0), (0,-1,0), (0,0,1), (0,0,-1)])
 
 boardSize = 4
 
-positions = set()
-
-def move_block_around():
+def move_block_around(positions):
   while(cuboid.xLength + cuboid.base[0] < boardSize+1):
     while(cuboid.yLength + cuboid.base[1] < boardSize+1):
       while(cuboid.zLength + cuboid.base[2] < boardSize+1):
@@ -75,7 +73,7 @@ for block in blocks:
     cuboid.normalize()
 
     for _ in range(4):
-      move_block_around()
+      move_block_around(positions)
       cuboid.spin()
       cuboid.normalize()
 
